@@ -1,0 +1,91 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form js</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="left">upload photo</div>
+        <div class="right">
+            <div class="field">
+                <label for="name">Name and Surname</label>
+                <input id="name" type="text" name="name" >
+            </div>
+            <div class="field">
+                <label for="position">Current Positon</label>
+                <input id="position" type="text" name="position" value="">
+            </div>
+            <div class="field">
+                <label for="loc">Location</label>
+                <input id="loc" type="text" name="loc" value="">
+            </div>
+            <div class="field">
+                <label for="education">Education</label>
+                <input id="education" type="text" name="education" value="">
+            </div>
+            <div class="field">
+                <label for="phone">Phone</label>
+                <input id="phone" type="text" name="phone" value="">
+            </div>
+            <div class="field">
+                <label for="email">Email</label>
+                <input id="email" type="text" name="email" value="">
+            </div>
+            <div class="field">
+                <label for="about">About You</label>
+                <input id="about" type="text" name="about" value="">
+            </div>
+            <button class="btn" onclick="send(event)"  >Send Information</button>
+            <div class="info-res" >
+                <button class="publish-btn" >Publish</button>
+                <button class="cancel-btn" onclick="closeInfo(event)"  >cancel</button>
+            </div>
+
+        </div>
+    </div>
+    <div class="more-info">
+        <div class="more-field">
+            <div class="label-flex">
+                <label for="social">Social Media Accounts</label>
+                <a href="#" class="add-btn" >+ Add New</a>
+            </div>
+            <div class="info-div"></div>
+        </div>
+    </div>
+
+    <div class="backdrop">
+        <div class="modal" onclick="event.stopPropagation()" >
+            <div class="header">
+                <h3  >Add Social Media Address</h3>
+                <button class="close-btn" >X</button>
+            </div>
+            <hr>
+            <div class="body">
+                <div class="field">
+                    <label for="url">URL Address</label>
+                    <input id="url"  name="url" type="text" placeholder="ex : https://www.linkedin.com/in/mattjafari" >
+                </div>
+                <div class="field">
+                    <label for="icon">Select Icon *</label>
+                    <input id="icon"  name="icon"  type="text" placeholder="Select Icon " >
+                </div>
+                <div class="field">
+                    <label for="description">Description *</label>
+                    <input id="description"  name="description" type="text" placeholder="ex : https://www.linkedin.com/in/mattjafari" >
+                </div>
+    
+                <div class="btn-div">
+                    <button class="cancel-btn" onclick="cancelModal(event)" >Cancel</button>
+                    <button class="save-btn" onclick="saveInfo(event)"  >Save ??</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="./script.js"></script>
+</body>
+</html>
