@@ -88,6 +88,24 @@ body{
                 border-radius: 10px;
                 text-align: left;
                 padding: 10px;
+                min-height: 60px;
+                ul{
+                    li{
+                        margin-bottom: 10px;
+                        color: #35A6D0;
+                        list-style: none;
+                        button{
+                            padding: 10px;
+                            background: #35A6D0;
+                            margin-left: 20px;
+                            border: none;
+                            outline: none;
+                            color: #fff;
+                            border-radius: 8px;
+                            cursor: pointer;
+                        }
+                    }
+                }
             }
         }
     }

@@ -1,5 +1,3 @@
-
-
 function send(e) {
     let name = document.getElementById("name").value;
     let position = document.getElementById("position").value;
@@ -25,101 +23,86 @@ function send(e) {
       res.appendChild(p);
   })
 }
-
 function closeInfo (e) {
   let canselBtn = document.querySelector(".cancel-btn");
   let res = document.querySelector(".info-res");
   res.classList.remove("active");
 }
 
-let addBtn = document.querySelector(".add-btn");
-addBtn.addEventListener('click', ()=> {
-
-})
-
-let addButton = document.querySelector(".add-btn");
-addBtn.addEventListener('click' , () => {
-  callModal();
-})
-
-let closeButton = document.querySelector(".close-btn");
-closeButton.addEventListener('click' , () =>{
-  let backDrop = document.querySelector(".backdrop");
-  backDrop.classList.remove("active");
-});
-
-let backDrop = document.querySelector(".backdrop");
-
-backDrop.addEventListener('click' , ()=>{
-  let backDrop = document.querySelector(".backdrop");
-  backDrop.classList.remove("active");
-});
-
-// let cancelButton = document.querySelector(".cancel-btn");
-// cancelButton.addEventListener('click', ()=>{
-//   let backDrop = document.querySelector(".backdrop");
-//   backDrop.classList.remove("active");
-// })
-
-function cancelModal(e) {
-
-
-  document.querySelector(".backdrop");
-  backDrop.classList.remove("active");
-}
-
 ///////////////////////////////////
 
+let addBtn = document.querySelector(".add-btn");
+let closeButton = document.querySelector(".close-btn");
+let backDrop = document.querySelector(".backdrop");
 
+// new code 
+addBtn.addEventListener('click', ()=>{
+  console.log(backDrop.addEventListener)
+  callModal();
+});
 
+closeButton.addEventListener('click', ()=>{
+  backDrop.classList.remove("active");
+});
 
+backDrop.addEventListener('click', ()=>{
+  backDrop.classList.remove("active");
+});
 
 let socialArr = [];
 
 function callModal(id){
-  document.getElementById("url").value = '';
-  document.getElementById("icon").value = '';
-  document.getElementById("description").value = '';
+  document.getElementById("url").value = "";
+  document.getElementById("icon").value = "";
+  document.getElementById("description").value = "";
 
-  let backDrop = document.querySelector(".backdrop");
   backDrop.classList.add("active");
 
-  document.querySelector(".save-btn").setAttribute("onclick", "saveInfo("+id+")")
+  document.querySelector(".save-btn").setAttribute("onclick", "saveInfo("+id+")");
 }
 
-
-function saveInfo(id) {
+function saveInfo(id){
   
-  console.log(id)
-  
-
   let urlInput = document.getElementById("url").value;
   let iconInput = document.getElementById("icon").value;
   let descInput = document.getElementById("description").value;
 
-  if(id===undefined){
-    
-    let socialObj = {urlInput,iconInput,descInput, id: socialArr.length}
+  if(id==undefined){
+    let socialObj = {urlInput,iconInput,descInput, id:socialArr.length}
     socialArr.push(socialObj);
-  }else{
-    let data = socialArr.filter(elem=>elem.id == id)[0];
-    data.urlInput = urlInput
-    data.iconInput = iconInput
-    data.descInput = descInput
+  } else {
+    let data = socialArr.filter(elem => elem.id == id)[0];
+    data.urlInput = urlInput;
+    data.iconInput = iconInput;
+    data.descInput = descInput;
   }
-  
-  let backDrop = document.querySelector(".backdrop");
+
   backDrop.classList.remove("active");
 
   printSoc();
-
 }
 
-function printSoc(){
-  let myLi = socialArr.reduce((total, elem)=>{
-    return total+= `<li>` + elem.descInput + `<button onclick="editSoc(${elem.id})">Edit</button><button onclick="deleteSoc(${elem.id})">Delete</button></li>`
-  }, '');
-  document.querySelector('.info-div').innerHTML = '<ul>' + myLi + '</ul>';
+
+function printSoc() {
+  let myLi = socialArr.sort((a,b) => a.sort-b.sort).reduce((total,elem) =>{
+   return total += `<li data-id="${elem.id}" > `+ elem.descInput +`<button onclick="editSoc(${elem.id})" >Edit</button><button onclick="deleteSoc(${elem.id})" >Delete</button> </li>`
+  },'');
+
+  document.querySelector(".info-div").innerHTML = '<ul id="list" > ' + myLi  +  ' </ul>';
+  $("#list").sortable({
+    stop: (event,ui)=>{
+      console.log("12");
+      console.log(event,ui);
+      [...document.querySelectorAll("#list li")].forEach((row,index) =>{
+        for(let i = 0 ; i <socialArr.length ; i++){
+          if (socialArr[i].id == row.dataset.id){
+            socialArr[i].sort = index;
+        } 
+        }
+      })
+    }
+  });
+
 }
 
 function deleteSoc(id){
@@ -127,16 +110,109 @@ function deleteSoc(id){
   printSoc();
 }
 
+
 function editSoc(id){
-  //open modal
   callModal(id)
   let data = socialArr.filter(elem=>elem.id == id)[0]
-  //input value set
+  // input value set
   document.getElementById("url").value = data.urlInput;
   document.getElementById("icon").value = data.iconInput;
   document.getElementById("description").value = data.descInput;
-
 }
+
+
+
+
+// old code 
+// addBtn.addEventListener('click' , () => {
+//   callModal();
+// })
+
+// closeButton.addEventListener('click' , () =>{
+//   backDrop.classList.remove("active");
+// });
+
+// backDrop.addEventListener('click' , ()=>{
+//   backDrop.classList.remove("active");
+// });
+
+// // let cancelButton = document.querySelector(".cancel-btn");
+// // cancelButton.addEventListener('click', ()=>{
+// //   let backDrop = document.querySelector(".backdrop");
+// //   backDrop.classList.remove("active");
+// // })
+
+// function cancelModal(e) {
+//   backDrop.classList.remove("active");
+// }
+
+// let socialArr = [];
+
+// function callModal(id){
+//   // set all inputs empty when open modal
+//   document.getElementById("url").value = '';
+//   document.getElementById("icon").value = '';
+//   document.getElementById("description").value = '';
+
+//   backDrop.classList.add("active");
+
+  // document.querySelector(".save-btn").setAttribute("onclick", "saveInfo("+id+")")
+// }
+
+
+// function saveInfo(id) {
+  
+//   console.log(id)
+  
+//   let urlInput = document.getElementById("url").value;
+//   let iconInput = document.getElementById("icon").value;
+//   let descInput = document.getElementById("description").value;
+
+//   if(id===undefined){
+    
+//     let socialObj = {urlInput,iconInput,descInput, id: socialArr.length}
+//     socialArr.push(socialObj);
+//   }else{
+//     let data = socialArr.filter(elem=>elem.id == id)[0];
+//     data.urlInput = urlInput
+//     data.iconInput = iconInput
+//     data.descInput = descInput
+//   }
+  
+//   backDrop.classList.remove("active");
+
+//   printSoc();
+
+// }
+
+// function printSoc(){
+//   let myLi = socialArr.reduce((total, elem)=>{
+//     return total+= `<li>` + elem.descInput + `<button onclick="editSoc(${elem.id})">Edit</button><button onclick="deleteSoc(${elem.id})">Delete</button></li>`
+//   }, '');
+//   document.querySelector('.info-div').innerHTML = '<ul>' + myLi + '</ul>';
+// }
+
+// function deleteSoc(id){
+//   socialArr = socialArr.filter(elem=>elem.id!==id);
+//   printSoc();
+// }
+
+// function editSoc(id){
+//   //open modal
+//   callModal(id)
+//   let data = socialArr.filter(elem=>elem.id == id)[0]
+//   //input value set
+//   document.getElementById("url").value = data.urlInput;
+//   document.getElementById("icon").value = data.iconInput;
+//   document.getElementById("description").value = data.descInput;
+
+// }
+
+
+
+
+
+
 
 // function editObj(id){
 //   let urlInput = document.getElementById("url").value;
