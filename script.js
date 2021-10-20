@@ -68,7 +68,7 @@ function saveInfo(id){
   let descInput = document.getElementById("description").value;
 
   if(id==undefined){
-    let socialObj = {urlInput,iconInput,descInput, id:socialArr.length}
+    let socialObj = {urlInput,iconInput,descInput, id:socialArr.length,sort:socialArr.length}
     socialArr.push(socialObj);
   } else {
     let data = socialArr.filter(elem => elem.id == id)[0];
@@ -94,11 +94,12 @@ function printSoc() {
       console.log("12");
       console.log(event,ui);
       [...document.querySelectorAll("#list li")].forEach((row,index) =>{
-        for(let i = 0 ; i <socialArr.length ; i++){
-          if (socialArr[i].id == row.dataset.id){
-            socialArr[i].sort = index;
-        } 
-        }
+        // for(let i = 0 ; i <socialArr.length ; i++){
+        //   if (socialArr[i].id == row.dataset.id){
+        //     socialArr[i].sort = index;
+        // } 
+        // }
+        socialArr.filter(item => item.id == row.dataset.id)[0].sort = index;
       })
     }
   });
